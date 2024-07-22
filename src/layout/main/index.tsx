@@ -14,7 +14,7 @@ function Main() {
   };
   const handleLogin = () => {
     console.log('home');
-    navigate('/login');
+    navigate('/authentication');
     return;
   };
   return (
@@ -36,7 +36,7 @@ function Main() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-      <Link to={'/login'}>Login Now</Link>
+      <Link to={'/authentication'}>Login Now</Link>
       <button onClick={handleLogin}> Login </button>
       <button onClick={handleHome}> Home </button>
       <p className="read-the-docs">
