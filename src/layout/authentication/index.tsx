@@ -1,19 +1,36 @@
 import { useForm } from "react-hook-form";
 import { useCreate } from "./apis/create";
+import { useGet } from "./apis/get";
+import { useSearch } from "./apis/search";
+import { useState } from "react";
 function Authentication() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
-    const { mutateAsync, isPending } = useCreate();
-//   const { mutateAsync, isPending } = useCreate();
+    const [searchId, setSearchId] = useState('');
+    const { register: searchRegister, handleSubmit: searchHandleSubmit, watch: searchWatch, formState: { errors: searchError } } = useForm();
+    const onSearch = async searchD =>  {
+      setSearchId(searchD.id)
+      console.log('search', searchD.id);
+      
+      // console.log('131231312', searchData);
+      // const response = await mutateAsync(data)
+      // console.log(response)
+    }
+    // const { mutateAsync, isPending } = useCreate();
+  const { mutateAsync, isPending } = useCreate();
     const onSubmit = async data =>  {
         console.log(data);
         const response = await mutateAsync(data)
         console.log(response)
+        setSearchId(response.id)
     }
   
-    console.log(watch("example")); // watch input value by passing the name of it
   
+    const { data: searchData } = useSearch(searchId);
+    const { data: getData } = useGet();
+
     return (
+      <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
         <p>Title</p>
@@ -27,6 +44,45 @@ function Authentication() {
         </div>
         <input type="submit" disabled={isPending}/>
       </form>
+      {/* <form onSubmit={handleSubmit(onSearch)}>
+        <div>
+        <p>id</p>
+        <input placeholder='id' {...register("id", { required: true })} />
+        </div>
+        <input type="submit"/>
+      </form> */}
+      <form onSubmit={searchHandleSubmit(onSearch)}>
+        <div>
+        <p>id</p>
+        <input placeholder='Id' {...searchRegister("id")} />
+        </div>
+        <input type="submit"/>
+      </form>
+      
+      { searchId ?
+        <div>
+         <p>Title {searchData?.title}</p>
+         <p>Body {searchData?.body}</p>
+        </div>
+      :
+        <div className="sample table">
+                  <table >
+                      <tr>
+                          <th>Title</th>
+                          <th>Body</th>
+                      </tr>
+                      {getData?.map((i => (
+                        <tr>
+                          <td>{i.title}</td>
+                          <td>{i.body}</td>
+                        </tr>
+                      )))}
+                  </table>
+          </div>
+      }
+     
+      
+    </div>
     );
   }
   

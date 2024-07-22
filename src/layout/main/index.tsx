@@ -2,7 +2,8 @@ import { useState } from 'react';
 import reactLogo from '../../assets/react.svg';
 import viteLogo from '/vite.svg';
 import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+
 
 function Main() {
   const [count, setCount] = useState(0);
@@ -36,9 +37,11 @@ function Main() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-      <Link to={'/authentication'}>Login Now</Link>
-      <button onClick={handleLogin}> Login </button>
-      <button onClick={handleHome}> Home </button>
+      <button>
+        <Link to={'/auth'}>Sample Authentication</Link> <br/>
+      </button>
+
+      <button onClick={handleLogin}> Sample CRUD </button>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
