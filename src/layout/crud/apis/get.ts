@@ -10,15 +10,15 @@ export type LoginDTO = {
 };
 
 
-export const get = async ()=> {
+export const get = async (userId)=> {
   const result = await axios.get('https://jsonplaceholder.typicode.com/posts');
-  console.log('result', result)
-  return result.data;
+  const res = await result.data?.filter(item => item.userId === Number(userId))
+  return res
 };
-export const useGet = () => {
+export const useGet = (userId) => {
     return useQuery({
-      queryKey: [],
-      queryFn: () => get(),
+      queryKey: ['get', userId],
+      queryFn: () => get(userId),
     });
 };
   

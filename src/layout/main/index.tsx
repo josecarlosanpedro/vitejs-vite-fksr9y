@@ -15,7 +15,7 @@ function Main() {
   };
   const handleLogin = () => {
     console.log('home');
-    navigate('/authentication');
+    navigate('/crud');
     return;
   };
   return (

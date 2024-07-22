@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { Notification } from '../../../utils/notifications';
 
 export type LoginDTO = {
   data: {
@@ -11,7 +12,6 @@ export type LoginDTO = {
 
 
 export const create = async (data)=> {
-  console.log('data', data)
   const result = await axios.post('https://jsonplaceholder.typicode.com/posts', data);
   return result.data;
 };
@@ -21,10 +21,10 @@ export const useCreate = () => {
   return useMutation({
     mutationFn: create,
     onError: (error) => {
-      console.log('error', error.message)
+      Notification('Error While Creating Record', 'error')
     },
     onSuccess: (context) => {
-      console.log('success', context)
+      Notification('Create Success')
     },
   });
 };

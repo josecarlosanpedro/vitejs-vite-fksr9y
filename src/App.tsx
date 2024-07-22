@@ -2,8 +2,7 @@ import { RouterProvider } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import Main from './layout/main';
-import Authentication from './layout/authentication';
-import Auth from './layout/auth';
+import Crud from './layout/crud';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Home from './layout/authenticated/home';
@@ -15,13 +14,9 @@ const router = createBrowserRouter([
     element: <Main />,
   },
   {
-    path: '/authentication',
-    element: <Authentication />,
+    path: '/crud',
+    element: <Crud />,
   },
-  // {
-  //   path: '/auth',
-  //   element: <Auth />,
-  // },
   {
     path: '/home',
     element: <Home />,
